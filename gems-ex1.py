@@ -1,8 +1,13 @@
 """ 
-the first exercise for the final exam 06.12.2023
+the second exercise for the final exam 06.12.2023
 Dojo-Style SE_01 Assessment: 6 Dec 2023
-gems-ex.1pdf
+gems-ex2.pdf
 Raj Sandhu
+
+objective: expand the 3x3 grid of exercise 1 pdf to 4x4 grid.
+
+note: 4 cell lines are now valid, and 3 cell lines are still valid
+
 """
 
 # NOT NECESSARY AT THIS STEP
@@ -19,7 +24,14 @@ Raj Sandhu
 #     return made_grid
 
 def make_grid():
-    made_grid = [[1,2,3],[4,4,5],[5,3,4]]
+    # expanding grid to match graphical changes from 5 to 7 gem types
+    # new gems are orange hexagon (6) and white decahedron (7)
+    # ------- original made grid
+    made_grid = [[2,1,2,3],[5,4,4,5],[2,5,3,4],[6,7,6,1]]
+    # # -------- test made grid, to pass 4 line test row
+    # made_grid = [[1,1,1,1],[5,4,4,5],[2,5,3,4],[6,7,6,1]]
+    # # -------- test made grid, to pass 4 line test column
+    # made_grid = [[1,1,2,3],[1,4,4,5],[1,5,3,4],[1,7,6,1]]
     return made_grid
 
 
@@ -36,7 +48,7 @@ def swap_cells(matrix):
            j2 = int(input("Enter the column number of the second cell (j2): ")) - 1
 
            # Check if the coordinates are valid
-           if 0 <= i1 < 3 and 0 <= j1 < 3 and 0 <= i2 < 3 and 0 <= j2 < 3:
+           if 0 <= i1 < 4 and 0 <= j1 < 4 and 0 <= i2 < 4 and 0 <= j2 < 4:
                break
            else:
                print("Invalid coordinates. Please enter numbers between 1 and 3.")
@@ -53,22 +65,36 @@ def swap_cells(matrix):
    return matrix
 
 def test_for_line(swapped_matrix):
-  # Check rows
-  for row in swapped_matrix:
-      if row.count(row[0]) == len(row):
-        print("row test: the move was valid, returns true")
-        return True
+    # Check rows
+    for row in swapped_matrix:
+        if row.count(row[0]) == len(row) or row.count(row[0] == 4):
+            print("row test for 4: the move was valid, returns true")
+            return True
 
 
   # Check columns
-  for col in range(len(swapped_matrix[0])):
-      column = [row[col] for row in swapped_matrix]
-      if column.count(column[0]) == len(column):
-        print("column test: the move was valid, returns true")
-        return True
+    for col in range(len(swapped_matrix[0])):
+        column = [row[col] for row in swapped_matrix]
+        if column.count(column[0]) == len(column) or column.count(column[0] == 4):
+            print("column test for 4: the move was valid, returns true")
+            return True
 
-  # If no identical numbers found in rows or columns
-  return False
+ # Check for 3-cell-length lines
+    for i in range(len(swapped_matrix)):
+        for j in range(len(swapped_matrix[i])):
+            if i < len(swapped_matrix) - 2 and swapped_matrix[i][j] == swapped_matrix[i+1][j] == swapped_matrix[i+2][j]:
+                print("row test for 3: the move was valid, returns true")
+                return True
+
+
+            if j < len(swapped_matrix[i]) - 2 and swapped_matrix[i][j] == swapped_matrix[i][j+1] == swapped_matrix[i][j+2]:
+                print("row test for 3: the move was valid, returns true")
+                return True
+
+
+
+    # If no identical numbers found in rows or columns
+    return False
 
 def print_legality(result):
     if result == True:
