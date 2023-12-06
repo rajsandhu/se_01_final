@@ -8,20 +8,24 @@ Raj Sandhu
 def main():
     # (1) make a 3x3 grid of numbers, each cell assigned 1-5, repeats possible
     grid = make_grid()
-    print(grid)
-    
     # (2) swap the contents of two cells
-
-
-
+    swapped_grid = swap_cells(grid)
     # (3) test whether any rows or columns now contain indentical numbers
+    is_move_legal = test_for_line(swapped_grid)
+    # (4) print result
+    print(is_move_legal)
 
 def make_grid():
-    return "test grid text"
+    made_grid = "m g sample text"
+    return made_grid
 
+def swap_cells(matrix):
+    swapped_matrix = "s m sample text " + matrix 
+    return swapped_matrix
 
-# def hello_world():
-#     print("hello world from an inner function")    
+def test_for_line(swapped_matrix):
+    legality = "t f l sample text" + swapped_matrix
+    return legality
 
 if __name__ == "__main__":
     main()
