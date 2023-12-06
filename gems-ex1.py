@@ -52,12 +52,30 @@ def swap_cells(matrix):
    # a simple return
    return matrix
 
-
-
 def test_for_line(swapped_matrix):
-    legality = swapped_matrix
-    return legality
+  # Check rows
+  for row in swapped_matrix:
+      if row.count(row[0]) == len(row):
+        print("row test: the move was valid, returns true")
+        return True
 
+
+  # Check columns
+  for col in range(len(swapped_matrix[0])):
+      column = [row[col] for row in swapped_matrix]
+      if column.count(column[0]) == len(column):
+        print("column test: the move was valid, returns true")
+        return True
+
+  # If no identical numbers found in rows or columns
+  return False
+
+def print_legality(result):
+    if result == True:
+        print("This was a legal move")
+    if result == False:
+        print("This was an *illegal* move")    
+    
 def main():
     # (1) make a 3x3 grid of numbers, each cell assigned 1-5, repeats possible
     grid = make_grid()
@@ -66,7 +84,7 @@ def main():
     # (3) test whether any rows or columns now contain indentical numbers
     is_move_legal = test_for_line(swapped_grid)
     # (4) print result
-    print(is_move_legal)
+    print_legality(is_move_legal)
     
 if __name__ == "__main__":
     main()
